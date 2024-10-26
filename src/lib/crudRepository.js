@@ -16,12 +16,12 @@ class CrudRepository{
     }
 
     async findAll(){
-        const {rows} = await pool.query(`SELECT * FROM ${this.tableName}`);
+        const [rows] = await pool.query(`SELECT * FROM ${this.tableName}`);
         return rows;
     }
 
     async findById(id){
-        const {rows} = await pool.query(`SELECT * FROM ${this.tableName}
+        const [rows] = await pool.query(`SELECT * FROM ${this.tableName}
             WHERE id = ?`,[id]);
         return rows[0];
     }

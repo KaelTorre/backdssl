@@ -3,7 +3,7 @@ class User{
     constructor(id,name,email){
         this.id = id;
         this.name = name;
-        this.correo = correo;
+        this.email = email;
     }
 }
 module.exports = User;
