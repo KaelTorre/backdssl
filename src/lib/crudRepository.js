@@ -27,9 +27,8 @@ class CrudRepository{
     }
 
     async create(data){
-        
         const [result] = await pool.query(`INSERT INTO ${this.tableName} SET ?`, data);
-        return {id:result.insertId, ...data}
+        return {id:result.insertId,...data};
     }
 
     async update(id, data){
