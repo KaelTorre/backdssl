@@ -37,8 +37,9 @@ class CrudRepository{
     }
 
     async delete(id){
+        console.log(`DELETE FROM ${this.tableName} WHERE id = ?`, [id]);
         const [result] = await pool.query(`DELETE FROM ${this.tableName} WHERE id = ?`, [id]);
-        return result.affectedeRows > 0;
+        return result.affectedRows > 0;
     }
 }
 module.exports = CrudRepository;
