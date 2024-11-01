@@ -20,5 +20,21 @@ class RolService{
     deleteRol(id){
         return rolRepository.delete(id);
     }
+
+    async getUsersByRol(rolId){ 
+        const rol = await rolRepository.findById(rolId);
+        if(!rol){
+            throw new Error('Rol not found');
+            return;
+        }
+        const users = await rolRepository.findUserByIdRol(rolId);
+        const userbyrol = {
+            data:{
+                ...rol,
+                usuarios: users
+            }
+        }
+        return userbyrol;
+    }
 }
 module.exports = new RolService();

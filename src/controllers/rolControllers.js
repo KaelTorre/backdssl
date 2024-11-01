@@ -10,7 +10,7 @@ router.get('/', async(req, res) =>{
 router.get('/:id', async(req, res) =>{
     const rol = await rolService.getRollById(req.params.id);
     if(rol){
-        res.statu(201).json(rol);
+        res.status(201).json(rol);
     }
     else{
         res.status(404).json({message:'Rol not found'});
@@ -43,6 +43,20 @@ router.delete('/:id', async (req, res) =>{
         res.status(200).send();
     }else{
         res.status(400).json({message:'Rol not deleted'});
+    }
+})
+
+router.get('/users/:rolId', async (req, res)=>{
+    try{
+        const result = await rolService.getUsersByRol(req.params.rolId);
+        res.json(result);
+    }catch(error){
+        if(error.message === 'Rol not found'){
+            res.status(404).json({error:error.message});
+        }
+        else{
+            res.status(500).json({error:error.message});
+        }
     }
 })
 
